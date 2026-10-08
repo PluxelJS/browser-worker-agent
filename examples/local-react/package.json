@@ -1,0 +1,26 @@
+{
+	"name": "@pluxel/browser-worker-agent-example-local-react",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc --noEmit && vite build",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@pluxel/browser-worker-agent": "workspace:^",
+		"@pluxel/browser-worker-agent-react": "workspace:^",
+		"@pluxel/browser-worker-agent-ui": "workspace:^",
+		"@earendil-works/pi-ai": "catalog:frontend",
+		"@assistant-ui/react": "catalog:frontend",
+		"capnweb": "catalog:backend",
+		"react": "catalog:frontend",
+		"react-dom": "catalog:frontend"
+	},
+	"devDependencies": {
+		"vite": "catalog:tooling",
+		"typescript": "catalog:tooling",
+		"@types/react": "catalog:frontend",
+		"@types/react-dom": "catalog:frontend"
+	}
+}

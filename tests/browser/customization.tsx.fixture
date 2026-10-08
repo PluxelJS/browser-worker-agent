@@ -1,0 +1,74 @@
+import { createRoot } from 'react-dom/client'
+import { useAuiState, type ToolCallMessagePartProps } from '@assistant-ui/react'
+import { createModels, fauxProvider, fauxAssistantMessage, fauxToolCall } from '@earendil-works/pi-ai'
+import { createAgentSession } from '@pluxel/browser-worker-agent'
+import {
+	AgentWorkspace,
+	type AgentWorkspaceComponents,
+	type AgentWorkspaceWelcomeProps,
+} from '@pluxel/browser-worker-agent-ui'
+import '@pluxel/browser-worker-agent-ui/styles.css'
+
+function Welcome({ configured, onConfigure }: AgentWorkspaceWelcomeProps) {
+	return (
+		<div data-testid="custom-welcome">
+			<h3>{configured ? 'Connected research assistant' : 'Connect your research assistant'}</h3>
+			<button onClick={onConfigure}>Custom model setup</button>
+		</div>
+	)
+}
+function Text() {
+	const part = useAuiState((state) => state.part)
+	return <p data-testid="custom-text">{part.type === 'text' || part.type === 'reasoning' ? part.text : ''}</p>
+}
+function Tool({ toolName, result }: ToolCallMessagePartProps) {
+	return <div data-testid="custom-tool">{toolName}: {JSON.stringify(result)}</div>
+}
+const components: AgentWorkspaceComponents = { Welcome, Text, Tool }
+const faux = fauxProvider({ tokensPerSecond: 10000 })
+const models = createModels()
+models.setProvider(faux.provider)
+faux.setResponses([
+	fauxAssistantMessage([fauxToolCall('readDoc', { id: 'research' })], { stopReason: 'toolUse' }),
+	fauxAssistantMessage('The verified research value is 42.'),
+])
+let acquisitions = 0
+const acquireApi = () => {
+	acquisitions++
+	throw new Error('Reading documentation must not acquire an API capability')
+}
+const configured = createAgentSession({
+	scopeKey: 'customization-connected',
+	titleGeneration: false,
+	model: faux.getModel(),
+	models,
+	documents: [{ id: 'research', title: 'Research source', version: '1', text: 'Verified research value: 42.' }],
+	acquireApi,
+})
+const unconfigured = createAgentSession({
+	scopeKey: 'customization-unconnected',
+	titleGeneration: false,
+	documents: [],
+	acquireApi,
+})
+createRoot(document.getElementById('root')!).render(
+	<>
+		<div className="fixture-workspace" data-testid="blue-workspace">
+			<AgentWorkspace
+				session={configured}
+				components={components}
+				theme={{ background: 'rgb(232, 242, 255)', primary: 'rgb(20, 60, 150)' }}
+			/>
+		</div>
+		<div className="fixture-workspace" data-testid="green-workspace">
+			<AgentWorkspace
+				session={unconfigured}
+				components={components}
+				theme={{ background: 'rgb(234, 250, 236)', primary: 'rgb(25, 95, 40)' }}
+			/>
+		</div>
+	</>,
+)
+Object.assign(window, {
+	customizationState: () => ({ acquisitions, calls: faux.state.callCount, error: configured.getSnapshot().error }),
+})

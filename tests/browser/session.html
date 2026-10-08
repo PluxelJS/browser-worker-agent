@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Agent workspace browser acceptance</title>
+		<style>
+			html,
+			body,
+			#root {
+				margin: 0;
+				min-height: 100%;
+			}
+			body {
+				padding: 16px;
+				font-family: system-ui;
+				background: #11161f;
+				color: #e8e9ee;
+			}
+			#root {
+				height: calc(100dvh - 32px);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script type="module" src="./session.tsx"></script>
+	</body>
+</html>

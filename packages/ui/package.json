@@ -1,0 +1,62 @@
+{
+	"name": "@pluxel/browser-worker-agent-ui",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "Customizable assistant-ui chat for browser-worker-agent",
+	"files": [
+		"dist",
+		"THIRD_PARTY_NOTICES.md",
+		"README.md"
+	],
+	"exports": {
+		".": {
+			"development": "./src/index.tsx",
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./styles.css": {
+			"development": "./src/styles.css",
+			"import": "./dist/ui.css"
+		}
+	},
+	"scripts": {
+		"build": "vite build && tsc -p tsconfig.build.json",
+		"typecheck": "tsc --noEmit --pretty false"
+	},
+	"dependencies": {
+		"radix-ui": "catalog:prod",
+		"lucide-react": "catalog:frontend",
+		"class-variance-authority": "catalog:frontend",
+		"cmdk": "catalog:frontend",
+		"clsx": "catalog:frontend",
+		"tailwind-merge": "catalog:frontend"
+	},
+	"peerDependencies": {
+		"@assistant-ui/react": "^0.15.23",
+		"react": "^19.3.0",
+		"react-dom": "^19.3.0",
+		"@pluxel/browser-worker-agent": "workspace:^",
+		"@pluxel/browser-worker-agent-react": "workspace:^"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/PluxelJS/browser-worker-agent.git"
+	},
+	"publishConfig": {
+		"exports": {
+			".": {
+				"types": "./dist/types/index.d.ts",
+				"import": "./dist/index.js"
+			},
+			"./styles.css": "./dist/ui.css"
+		}
+	},
+	"devDependencies": {
+		"@assistant-ui/react-streamdown": "catalog:frontend",
+		"streamdown": "catalog:frontend",
+		"@streamdown/code": "catalog:frontend",
+		"@streamdown/cjk": "catalog:frontend",
+		"@pluxel/browser-worker-agent": "workspace:^",
+		"@pluxel/browser-worker-agent-react": "workspace:^"
+	}
+}

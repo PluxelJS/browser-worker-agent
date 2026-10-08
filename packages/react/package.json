@@ -1,0 +1,45 @@
+{
+	"name": "@pluxel/browser-worker-agent-react",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "Native assistant-ui runtime and history bindings for browser-worker-agent",
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"exports": {
+		".": {
+			"development": "./src/index.tsx",
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "vite build && tsc -p tsconfig.build.json",
+		"typecheck": "tsc --noEmit --pretty false"
+	},
+	"dependencies": {
+		"@earendil-works/pi-agent-core": "catalog:frontend"
+	},
+	"peerDependencies": {
+		"@assistant-ui/react": "^0.15.23",
+		"react": "^19.3.0",
+		"react-dom": "^19.3.0",
+		"@pluxel/browser-worker-agent": "workspace:^"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/PluxelJS/browser-worker-agent.git"
+	},
+	"publishConfig": {
+		"exports": {
+			".": {
+				"types": "./dist/types/index.d.ts",
+				"import": "./dist/index.js"
+			}
+		}
+	},
+	"devDependencies": {
+		"@pluxel/browser-worker-agent": "workspace:^"
+	}
+}

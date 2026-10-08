@@ -1,0 +1,69 @@
+packages:
+  - .
+  - packages/*
+  - examples/*
+
+allowBuilds:
+  esbuild: true
+  '@google/genai': false
+  protobufjs: false
+
+peerDependencyRules:
+  allowedVersions:
+    '@assistant-ui/react-streamdown@0.3.18>@streamdown/code': '2.0.0'
+
+minimumReleaseAgeExclude:
+  - '@rolldown/binding-android-arm-eabi@1.2.13'
+  - '@rolldown/binding-android-arm64@1.2.13'
+  - '@rolldown/binding-darwin-arm64@1.2.13'
+  - '@rolldown/binding-darwin-x64@1.2.13'
+  - '@rolldown/binding-freebsd-x64@1.2.13'
+  - '@rolldown/binding-linux-arm-gnueabihf@1.2.13'
+  - '@rolldown/binding-linux-arm64-gnu@1.2.13'
+  - '@rolldown/binding-linux-arm64-musl@1.2.13'
+  - '@rolldown/binding-linux-ppc64-gnu@1.2.13'
+  - '@rolldown/binding-linux-s390x-gnu@1.2.13'
+  - '@rolldown/binding-linux-x64-gnu@1.2.13'
+  - '@rolldown/binding-linux-x64-musl@1.2.13'
+  - '@rolldown/binding-openharmony-arm64@1.2.13'
+  - '@rolldown/binding-win32-arm64-msvc@1.2.13'
+  - '@rolldown/binding-win32-x64-msvc@1.2.13'
+  - playwright-core@1.64.0
+  - playwright@1.64.0
+  - rolldown@1.2.13
+  - '@earendil-works/pi-agent-core@1.1.0'
+  - '@earendil-works/pi-ai@1.1.0'
+  - '@earendil-works/pi-telemetry@1.1.0'
+catalogs:
+  backend:
+    capnweb: ^0.12.0
+  frontend:
+    '@assistant-ui/react': ^0.15.25
+    '@assistant-ui/react-streamdown': 0.3.18
+    '@earendil-works/pi-agent-core': 1.1.0
+    '@earendil-works/pi-ai': 1.1.0
+    '@streamdown/cjk': ^1.0.4
+    '@streamdown/code': 2.0.0
+    '@tailwindcss/vite': ^4.3.3
+    '@types/react': ^19.3.0
+    '@types/react-dom': ^19.3.0
+    class-variance-authority: ^0.7.1
+    clsx: ^2.1.1
+    cmdk: ^1.1.1
+    lucide-react: ^1.52.0
+    react: ^19.3.0
+    react-dom: ^19.3.0
+    streamdown: ^2.7.0
+    tailwind-merge: ^3.7.0
+    tailwindcss: ^4.3.3
+  prod:
+    radix-ui: ^1.7.0
+  test:
+    fake-indexeddb: ^6.2.5
+    playwright: ^1.64.0
+    vitest: ^5.0.3
+  tooling:
+    pncat: ^0.13.4
+    rolldown: ^1.2.13
+    typescript: ^7.0.2
+    vite: ^8.3.3

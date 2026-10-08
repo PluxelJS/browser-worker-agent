@@ -1,0 +1,41 @@
+body {
+	margin: 0;
+	background: #f6f7f9;
+	color: #20242c;
+	font-family: system-ui, sans-serif;
+}
+main {
+	max-width: 850px;
+	margin: auto;
+	padding: 20px;
+}
+h1 {
+	font-size: 1.5rem;
+}
+nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 20px 0;
+}
+button,
+select,
+textarea {
+	font: inherit;
+}
+textarea {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	min-height: 65px;
+	margin: 8px 0 16px;
+	padding: 8px;
+}
+.chat {
+	height: 560px;
+	max-height: 70vh;
+	min-height: 340px;
+	border: 1px solid #d5d9df;
+	border-radius: 12px;
+	overflow: hidden;
+}

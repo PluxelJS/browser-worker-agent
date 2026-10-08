@@ -1,0 +1,219 @@
+/* Official registry utilities use the standard shadcn palette inside the chat
+ * surface and its portals. Neither theme tokens nor reset styles escape it. */
+@reference 'tailwindcss';
+@source './';
+@source '../node_modules/@assistant-ui/react-streamdown/dist/*.js';
+@source '../node_modules/streamdown/dist/*.js';
+@source '../node_modules/@streamdown/code/dist/*.js';
+@source '../node_modules/@streamdown/cjk/dist/*.js';
+@custom-variant dark (&:where(.dark, .dark *, [data-theme='dark'], [data-theme='dark'] *));
+@theme inline {
+	--color-background: var(--aui-background);
+	--color-foreground: var(--aui-foreground);
+	--color-card: var(--aui-background);
+	--color-card-foreground: var(--aui-foreground);
+	--color-popover: var(--aui-background);
+	--color-popover-foreground: var(--aui-foreground);
+	--color-primary: var(--aui-primary);
+	--color-primary-foreground: var(--aui-primary-foreground);
+	--color-secondary: var(--aui-muted);
+	--color-secondary-foreground: var(--aui-foreground);
+	--color-muted: var(--aui-muted);
+	--color-muted-foreground: var(--aui-muted-foreground);
+	--color-accent: var(--aui-muted);
+	--color-accent-foreground: var(--aui-foreground);
+	--color-destructive: var(--aui-destructive);
+	--color-destructive-foreground: white;
+	--color-border: var(--aui-border);
+	--color-input: var(--aui-border);
+	--color-ring: var(--aui-primary);
+	--animate-collapsible-down: aui-collapsible-down 200ms ease-out;
+	--animate-collapsible-up: aui-collapsible-up 200ms ease-out;
+	@keyframes aui-collapsible-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--radix-collapsible-content-height);
+		}
+	}
+	@keyframes aui-collapsible-up {
+		from {
+			height: var(--radix-collapsible-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}
+}
+.aui-root {
+	/* Tailwind default utility tokens, localized for standalone consumers. */
+	--spacing: 0.25rem;
+	--color-black: #000;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--text-xs: 0.75rem;
+	--text-xs--line-height: 1rem;
+	--text-sm: 0.875rem;
+	--text-sm--line-height: 1.25rem;
+	--text-base: 1rem;
+	--text-base--line-height: 1.5rem;
+	--text-lg: 1.125rem;
+	--text-lg--line-height: 1.75rem;
+	--text-xl: 1.25rem;
+	--text-xl--line-height: 1.75rem;
+	--text-2xl: 1.5rem;
+	--text-2xl--line-height: calc(2 / 1.5);
+	--text-3xl: 1.875rem;
+	--text-3xl--line-height: calc(2.25 / 1.875);
+	--leading-tight: 1.25;
+	--leading-relaxed: 1.625;
+	--tracking-tight: -0.025em;
+	--tracking-wide: 0.025em;
+	--tracking-widest: 0.1em;
+	--radius-sm: 0.25rem;
+	--radius-md: 0.375rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
+	--container-sm: 24rem;
+	--container-md: 28rem;
+	--container-lg: 32rem;
+	--container-2xl: 42rem;
+	--blur-sm: 8px;
+	--ease-out: cubic-bezier(0, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+	--default-transition-duration: 150ms;
+	--default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	--animate-spin: aui-spin 1s linear infinite;
+	--animate-pulse: aui-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	--color-background: var(--aui-background);
+	--color-muted: var(--aui-muted);
+	--color-red-50: oklch(97.1% 0.013 17.38);
+	--color-red-100: oklch(93.6% 0.032 17.717);
+	--color-red-600: oklch(57.7% 0.245 27.325);
+	--color-red-700: oklch(50.5% 0.213 27.518);
+	--color-red-800: oklch(44.4% 0.177 26.899);
+	--aui-background: var(--agent-workspace-background, hsl(0 0% 100%));
+	--aui-foreground: var(--agent-workspace-foreground, hsl(240 10% 3.9%));
+	--aui-primary: var(--agent-workspace-primary, hsl(240 5.9% 10%));
+	--aui-primary-foreground: var(--agent-workspace-primary-foreground, hsl(0 0% 98%));
+	--aui-muted: var(--agent-workspace-muted, hsl(240 4.8% 95.9%));
+	--aui-muted-foreground: var(--agent-workspace-muted-foreground, hsl(240 3.8% 46.1%));
+	--aui-border: var(--agent-workspace-border, hsl(240 5.9% 90%));
+	--aui-destructive: var(--agent-workspace-destructive, hsl(0 72% 45%));
+	color: var(--aui-foreground);
+	font-family: ui-sans-serif, system-ui, sans-serif;
+	line-height: 1.5;
+}
+.dark .aui-root,
+[data-theme='dark'] .aui-root,
+.aui-root.dark {
+	--aui-background: var(--agent-workspace-background, hsl(240 10% 3.9%));
+	--aui-foreground: var(--agent-workspace-foreground, hsl(0 0% 98%));
+	--aui-primary: var(--agent-workspace-primary, hsl(0 0% 98%));
+	--aui-primary-foreground: var(--agent-workspace-primary-foreground, hsl(240 5.9% 10%));
+	--aui-muted: var(--agent-workspace-muted, hsl(240 3.7% 15.9%));
+	--aui-muted-foreground: var(--agent-workspace-muted-foreground, hsl(240 5% 64.9%));
+	--aui-border: var(--agent-workspace-border, hsl(240 3.7% 15.9%));
+	--aui-destructive: var(--agent-workspace-destructive, hsl(0 85% 65%));
+}
+@keyframes aui-pulse {
+	50% {
+		opacity: 0.5;
+	}
+}
+@keyframes aui-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+/* UI and portal boundary wrappers keep styled elements inside this scope. */
+@scope (.aui-root) {
+	*,
+	::before,
+	::after {
+		box-sizing: border-box;
+		border-width: 0;
+		border-style: solid;
+		border-color: var(--aui-border);
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	pre {
+		margin: 0;
+	}
+	button,
+	input,
+	textarea,
+	select {
+		font: inherit;
+		color: inherit;
+		background-color: transparent;
+	}
+	fieldset {
+		margin: 0;
+		padding: 0;
+	}
+	button {
+		cursor: pointer;
+	}
+	button:disabled {
+		cursor: default;
+	}
+	@tailwind utilities;
+}
+
+/* Host sizing and bounded code output are independent of the registry theme. */
+.agent-workspace-thread {
+	--composer-bg: color-mix(in oklab, var(--aui-muted) 30%, transparent);
+	--composer-radius: 1rem;
+	--composer-padding: 8px;
+	flex: 1;
+	min-width: 0;
+	min-height: 0;
+}
+.agent-workspace-viewport {
+	min-height: 0;
+	overscroll-behavior: contain;
+	scrollbar-gutter: stable;
+}
+.agent-workspace-messages,
+.agent-workspace-message {
+	min-width: 0;
+	overflow-wrap: anywhere;
+}
+.agent-workspace-text {
+	white-space: pre-wrap;
+}
+.agent-workspace-notices {
+	overflow-wrap: anywhere;
+}
+.agent-workspace-notices:not(:empty) {
+	margin-bottom: 0.75rem;
+}
+.agent-workspace-tool-copy {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-width: 0;
+}
+.agent-workspace-process [data-slot='tool-group-trigger'],
+.agent-workspace-tool [data-slot='tool-group-trigger'] {
+	max-width: 100%;
+}
+.agent-workspace-process .aui-tool-group-trigger-label-wrapper {
+	min-width: 0;
+}
+.agent-workspace-message-actions {
+	margin-top: 0.5rem;
+}
+.agent-workspace-reference-popover {
+	max-height: min(24rem, calc(100dvh - 14rem));
+}
